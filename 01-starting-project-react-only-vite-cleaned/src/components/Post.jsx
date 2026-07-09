@@ -6,10 +6,10 @@ import styles from "./Post.module.css";
 function Post({ author, body }) {
   console.log(author, body);
   return (
-    <div className={styles.post}>
+    <li className={styles.post}>
       <p className={styles.author}>{author}</p>
       <p className={styles.text}>{body}</p>
-    </div>
+    </li>
   );
 }
 
