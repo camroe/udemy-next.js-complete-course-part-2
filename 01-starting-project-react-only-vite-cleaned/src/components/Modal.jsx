@@ -13,7 +13,7 @@ function Modal({ children }) {
             {/* Background overlay behind the modal. */}
             <div className={classes.backdrop} />
             {/* Dialog container for the content passed through the children prop. */}
-            <dialog className={classes.modal}>
+            <dialog open={true} className={classes.modal}>
                 {children}
             </dialog>
         </>
