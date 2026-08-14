@@ -7,11 +7,11 @@ import classes from './Modal.module.css';
 // It allows for flexible composition of components, enabling the parent to provide any content it wants to the child component. 
 // In this case, the Modal component can render any content passed to it through the children prop, making it reusable for different 
 // types of content.
-function Modal({ children }) {
+function Modal({ children, closeModalHandler }) {
     return (
         <>
             {/* Background overlay behind the modal. */}
-            <div className={classes.backdrop} />
+            <div className={classes.backdrop} onClick={closeModalHandler} />
             {/* Dialog container for the content passed through the children prop. */}
             <dialog open={true} className={classes.modal}>
                 {children}
