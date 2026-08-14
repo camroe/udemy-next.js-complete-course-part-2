@@ -3,19 +3,13 @@ import styles from "./PostsList.module.css";
 import NewPost from "./NewPost";
 import Modal from "./Modal";
 import { useState } from "react";
+import MainHeader from "./MainHeader";
 
-function PostsList({ posts }) {
+function PostsList({ posts, closeModalHandler, modalVisible }) {
     console.log(posts);
-    const [modalVisible, setModalVisible] = useState(true);
-    const [changedText, setText] = useState('');
     const [changedAuthor, setAuthor] = useState('');
+    const [changedText, setText] = useState('');
 
-    function closeModalHandler() {
-        setModalVisible(false);
-    }
-    function openModalHandler() {
-        setModalVisible(true);
-    }
 
     function changedTextHandler(event) {
         setText(event.target.value);
@@ -40,14 +34,14 @@ function PostsList({ posts }) {
     }
     return (
         <>
-        {modalVisible && (
-        <Modal closeModalHandler={closeModalHandler}>
-            <NewPost
-                changedTextHandler={changedTextHandler}
-                changedAuthorHandler={changedAuthorHandler}
-            />
-        </Modal>
-        )}
+            {modalVisible && (
+                <Modal closeModalHandler={closeModalHandler}>
+                    <NewPost
+                        changedTextHandler={changedTextHandler}
+                        changedAuthorHandler={changedAuthorHandler}
+                    />
+                </Modal>
+            )}
             <ul className={styles.posts}>
                 {posts.map((post, index) => (
                     <Post key={index} author={selectAuthor(post, index)} body={selectBody(post, index)} />
