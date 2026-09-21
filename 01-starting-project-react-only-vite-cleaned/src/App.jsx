@@ -4,11 +4,11 @@ import MainHeader from "./components/MainHeader";
 function App() {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const posts = [
-    { author: "Cameron", body: "React is awesome" },
-    { author: "Maximilian", body: "Check out the whole course" }
-  ];
-
+  // const posts = [
+  //   { author: "Cameron", body: "React is awesome" },
+  //   { author: "Maximilian", body: "Check out the whole course" }
+  // ];
+const posts = [];
   function closeModalHandler() {
     setModalVisible(false);
   }
