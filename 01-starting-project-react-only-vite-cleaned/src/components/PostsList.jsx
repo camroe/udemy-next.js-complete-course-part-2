@@ -7,6 +7,7 @@ import MainHeader from "./MainHeader";
 
 function PostsList({ posts, closeModalHandler, modalVisible }) {
     const [postsList, setPostsList] = useState(posts);
+    const [isLoading, setIsLoading] = useState(false);
 
     /*
      * Load the saved posts from the backend after the first render. useEffect
@@ -22,10 +23,18 @@ function PostsList({ posts, closeModalHandler, modalVisible }) {
      */
     useEffect(() => {
         async function fetchPosts() {
+            setIsLoading(true);
             const response = await fetch("http://localhost:8080/posts");
             const data = await response.json();
             // console.log(data);
+            if (!response.ok) {
+                // Handle the error case
+                console.error("Failed to fetch posts:", data);
+                setIsLoading(false);
+                return;
+            }
             setPostsList(data.posts);
+            setIsLoading(false);
         }
         fetchPosts();
         // console.log(postsList);
@@ -57,9 +66,8 @@ function PostsList({ posts, closeModalHandler, modalVisible }) {
                     />
                 </Modal>
             )}
-            {postsList.length === 0 && <p><h2>No Posts Available.</h2></p>}
-            {
-                postsList.length > 0 && (
+            {!isLoading && postsList.length === 0 && <h2>No Posts Available.</h2>}
+            {!isLoading && postsList.length > 0 && (
                     <ul className={styles.posts}>
                         {postsList.map((post, index) => (
                             <Post key={index} author={post.author} body={post.body} />
@@ -67,6 +75,7 @@ function PostsList({ posts, closeModalHandler, modalVisible }) {
                     </ul>
                 )
             }
+            {isLoading && <h2>Loading...</h2>}
         </>
     );
 }
