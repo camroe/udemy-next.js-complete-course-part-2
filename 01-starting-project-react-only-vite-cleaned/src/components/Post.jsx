@@ -4,7 +4,7 @@
 import styles from "./Post.module.css";
 
 function Post({ author, body }) {
-  console.log(author, body);
+  // console.log(author, body);
   return (
     <li className={styles.post}>
       <p className={styles.author}>{author}</p>
